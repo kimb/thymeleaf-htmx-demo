@@ -10,6 +10,7 @@
 <form>
     <div id="rules" class="sortable" th:fragment="rules">
         <div th:each="rule : ${rules}">
+            <span th:text="${rule.priority+1}+'.'"></span>
             <input type="hidden" name="id" th:value="${rule.id}"></input>
             <span th:text="${rule.name}"></span>
         </div>
