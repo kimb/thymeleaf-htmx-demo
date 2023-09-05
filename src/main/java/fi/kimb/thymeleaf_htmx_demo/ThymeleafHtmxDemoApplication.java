@@ -14,8 +14,8 @@ public class ThymeleafHtmxDemoApplication {
 
     @Autowired
     public void initialData(RuleRepository rr) {
-        rr.save(new Rule(null, "Products", 1));
-        rr.save(new Rule(null, "Features", 2));
-        rr.save(new Rule(null, "Front page", 3));
+        rr.save(new Rule(null, "Products", 0));
+        rr.save(new Rule(null, "Features", 1));
+        rr.save(new Rule(null, "Front page", 2));
     }
 }

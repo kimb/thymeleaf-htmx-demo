@@ -1,5 +1,7 @@
 # Getting Started
 
+Start by running: `./mvnw spring-boot:run`
+
 * Application is available at [localhost:8080](http://localhost:8080/)
 * [H2 console](http://localhost:8080/h2-console/) with `jdbc:h2:mem:testdb` as JDBC url.
 
