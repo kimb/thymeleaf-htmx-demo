@@ -15,7 +15,8 @@
             <span th:text="${rule.name}"></span>
         </div>
     </div>
-    <input type="submit" hx-post="/order" hx-target="#rules" hx-on::after-request="makeSortable(htmx.find('#rules'))"
+    <input type="submit" hx-post="/priority" hx-target="#rules"
+           hx-on::after-request="makeSortable(htmx.find('#rules'))"
            value="Save"/>
     <span class="htmx-indicator">Updating...</span>
 </form>
