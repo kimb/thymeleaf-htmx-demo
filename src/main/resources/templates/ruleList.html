@@ -10,12 +10,16 @@
     <input class="bg-sky-500 p-1 px-2 m-1 rounded shadow disabled:opacity-75"
            th:hx-get="@{'/new'}" hx-push-url="true" hx-target="body" hx-select="#content"
            type="submit" th:value="#{rules.new}"/>
-    <input class="block float-right bg-sky-500 p-1 m-1 rounded shadow disabled:opacity-75"
-           type="submit" hx-post="/priority" hx-target="#rules"
-           th:value="#{rules.save}"/>
-    <span class="htmx-indicator">Updating...</span>
-    <div id="rules" class="sortable clear-right" th:fragment="rules">
-        <div th:each="rule : ${rules}" class="block w-full bg-white shadow rounded px-3 pt-3 pb-5 border border-gray">
+    <div class="float-right">
+        <span id="save-indicator" class="htmx-indicator">Saving...</span>
+        <input id="saveOrder" class="bg-sky-500 p-1 px-2 m-1 rounded shadow disabled:opacity-50"
+               hx-post="/priority" hx-target="#rules" hx-swap="outerHTML" hx-indicator="#save-indicator"
+               type="submit" disabled th:value="#{rules.save}"/>
+
+
+    </div>
+    <div id="rules" class="clear-right space-y-1" th:fragment="rules">
+        <div th:each="rule : ${rules}" class="block w-full bg-white shadow rounded p-4 border border-gray">
             <span th:text="${rule.priority+1}+'.'"></span>
             <input type="hidden" name="id" th:value="${rule.id}"></input>
             <span th:text="${rule.name}"></span>
