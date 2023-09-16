@@ -19,17 +19,20 @@
             <span th:text="${rule.priority+1}+'.'"></span>
             <input type="hidden" name="id" th:value="${rule.id}"></input>
             <span th:text="${rule.name}"></span>
-            <input class="float-right"
+            <input class="editBtn float-right bg-sky-500 px-4 py-1 border rounded-full disabled:opacity-50"
                    th:hx-get="@{'/rule/'+${rule.id}}" hx-push-url="true" hx-target="body" hx-select="#content"
                    type="submit" value="..."/>
         </div>
         <script>
             htmx.find('#saveOrder').disabled=true;
-            function enableSave() { htmx.find('#saveOrder').disabled=false; }
+            function onSortChange() {
+                htmx.find('#saveOrder').disabled=false;
+                htmx.findAll('.editBtn').forEach((b)=>b.disabled=true);
+            }
             sort = new Sortable(htmx.find('#rules'), {
                 animation: 150,
                 ghostClass: 'bg-blue-500',
-                onSort: enableSave
+                onSort: onSortChange
             });
         </script>
     </div>
