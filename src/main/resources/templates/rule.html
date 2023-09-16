@@ -16,23 +16,24 @@
             <span th:text="${rule.priority+1}+'.'"></span>
             <input type="hidden" name="id" th:value="${rule.id}"></input>
             <span th:text="${rule.name}"></span>
+            <input class="float-right"
+                   type="submit" th:hx-get="'/rule/'+${rule.id}" hx-target="closest body" value="..."/>
         </div>
     </div>
-    <script type="javascript">
-        function makeSortable(content) {
-            var sortables = content.querySelectorAll(".sortable");
-            for (var i = 0; i < sortables.length; i++) {
-              var sortable = sortables[i];
-              sort = new Sortable(sortable, {
-                  animation: 150,
-                  ghostClass: 'blue-background-class'
-              });
-            }
-        };
-        htmx.onLoad(makeSortable);
-    </script>
 </form>
 
-
+<script type="javascript">
+    function makeSortable(content) {
+        var sortables = content.querySelectorAll(".sortable");
+        for (var i = 0; i < sortables.length; i++) {
+          var sortable = sortables[i];
+          sort = new Sortable(sortable, {
+              animation: 150,
+              ghostClass: 'blue-background-class'
+          });
+        }
+    };
+    htmx.onLoad(makeSortable);
+</script>
 </body>
 </html>
