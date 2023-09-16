@@ -1,11 +1,20 @@
 package fi.kimb.thymeleaf_htmx_demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Rule {
     @Id
     @GeneratedValue
@@ -16,22 +25,4 @@ public class Rule {
 
     @Column(nullable = false)
     public Integer priority;
-
-    public Rule() {
-    }
-
-    public Rule(Long id, String name, Integer priority) {
-        this.id = id;
-        this.name = name;
-        this.priority = priority;
-    }
-
-    @Override
-    public String toString() {
-        return "Rule{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", priority=" + priority +
-                '}';
-    }
 }
