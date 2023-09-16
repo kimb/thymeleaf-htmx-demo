@@ -24,7 +24,7 @@ public class RuleController {
         return "ruleList";
     }
 
-    @PostMapping(path = "/priority")
+    @PostMapping("/priority")
     @Transactional
     public String savePriorities(@RequestParam(name = "id") Rule[] rules, final Model model) {
         for (int i = 0; i < rules.length; i++) {
@@ -40,7 +40,7 @@ public class RuleController {
         return "rule";
     }
 
-    @PostMapping(path = "/rule")
+    @PostMapping("/rule")
     @Transactional
     public String saveRule(Rule rule, final Model model) {
         LOG.warn("Saving " + rule);
