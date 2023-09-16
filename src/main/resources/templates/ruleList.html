@@ -23,7 +23,15 @@
                    th:hx-get="@{'/rule/'+${rule.id}}" hx-push-url="true" hx-target="body" hx-select="#content"
                    type="submit" value="..."/>
         </div>
-        <script>makeSortable(htmx.find('#rules'));</script>
+        <script>
+            htmx.find('#saveOrder').disabled=true;
+            function enableSave() { htmx.find('#saveOrder').disabled=false; }
+            sort = new Sortable(htmx.find('#rules'), {
+                animation: 150,
+                ghostClass: 'bg-blue-500',
+                onSort: enableSave
+            });
+        </script>
     </div>
 </form>
 </body>

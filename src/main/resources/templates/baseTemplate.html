@@ -11,19 +11,6 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css"/>
     <script src="https://cdn.tailwindcss.com/3.3.0"></script>
-    <script>
-        function makeSortable(content) {
-            var sortables = content.querySelectorAll(".sortable");
-            for (var i = 0; i < sortables.length; i++) {
-              var sortable = sortables[i];
-              sort = new Sortable(sortable, {
-                  animation: 150,
-                  ghostClass: 'blue-background-class'
-              });
-            }
-        };
-        htmx.onLoad(makeSortable);
-    </script>
 </head>
 <body class="p-4">
 <div th:replace="${content}">
