@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
@@ -35,5 +32,20 @@ public class RuleController {
         }
         ruleRepository.saveAll(Arrays.asList(rules));
         return list(model) + " :: rules";
+    }
+
+    @GetMapping("/rule/{id}")
+    public String rule(final Model model, @PathVariable("id") long id) {
+        model.addAttribute("rule", ruleRepository.findById(id).get());
+        return "rule";
+    }
+
+    @PostMapping(path = "/rule")
+    @Transactional
+    public String saveRule(Rule rule, final Model model) {
+        LOG.warn("Saving " + rule);
+        LOG.info("Model" + model);
+        ruleRepository.save(rule);
+        return list(model);
     }
 }

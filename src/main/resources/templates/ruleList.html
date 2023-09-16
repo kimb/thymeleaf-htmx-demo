@@ -7,16 +7,19 @@
 <body>
 <form id="content">
     <h1>Edit rules</h1>
-    <input class="block float-right bg-sky-500 p-1 rounded shadow disabled:opacity-75"
+    <input class="block float-right bg-sky-500 p-1 m-1 rounded shadow disabled:opacity-75"
            type="submit" hx-post="/priority" hx-target="#rules"
            hx-on::after-request="makeSortable(htmx.find('#rules'))"
-           th:value="#{rule.save}"/>
+           th:value="#{rules.save}"/>
     <span class="htmx-indicator">Updating...</span>
     <div id="rules" class="sortable clear-right" th:fragment="rules">
         <div th:each="rule : ${rules}" class="block w-full bg-white shadow rounded px-3 pt-3 pb-5 border border-gray">
             <span th:text="${rule.priority+1}+'.'"></span>
             <input type="hidden" name="id" th:value="${rule.id}"></input>
             <span th:text="${rule.name}"></span>
+            <input class="float-right"
+                   th:hx-get="@{'/rule/'+${rule.id}}" hx-push-url="true" hx-target="body" hx-select="#content"
+                   type="submit" value="..."/>
         </div>
     </div>
 </form>

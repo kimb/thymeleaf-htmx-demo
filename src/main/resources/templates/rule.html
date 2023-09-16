@@ -9,19 +9,24 @@
 <form id="content" th:object="${rule}">
     <h1>Edit rule</h1>
 
-    <input class="block float-right bg-sky-500 p-1 rounded shadow disabled:opacity-75"
-           type="submit" hx-post="/priority" hx-target="#rules"
-           hx-on::after-request="makeSortable(htmx.find('#rules'))"
-           th:value="#{rule.save}"/>
-    <span class="htmx-indicator">Updating...</span>
-    <div id="rules" class="sortable clear-right" th:fragment="rules">
-        <div th:each="rule : ${rules}" class="block w-full bg-white shadow rounded px-3 pt-3 pb-5 border border-gray">
-            <span th:text="${rule.priority+1}+'.'"></span>
-            <input type="hidden" name="id" th:value="${rule.id}"></input>
-            <span th:text="${rule.name}"></span>
-            <input class="float-right"
-                   type="submit" th:hx-get="'/rule/'+${rule.id}" hx-target="closest body" value="..."/>
-        </div>
+    <input type="hidden" name="id" th:value="*{id}"/>
+    <input type="hidden" name="priority" th:value="*{priority}"/>
+    <div class="relative mb-3">
+        <input class="peer m-0 block h-[58px] w-6/12 rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
+               id="name" name="name" type="text" th:value="*{name}"/>
+        <label class="pointer-events-none absolute left-0 top-0 origin-[0_0] border border-solid border-transparent px-3 py-4 text-neutral-500 transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none"
+               for="name">Name:</label>
+    </div>
+
+    <div class="float-right">
+        <span class="htmx-indicator">Updating...</span>
+        <input class="bg-black-200 p-1 m-1 rounded shadow disabled:opacity-75"
+               hx-get="/" hx-push-url="true" hx-target="body"
+               hx-on::after-request="makeSortable(htmx.find('#rules'))"
+               type="submit" th:value="#{rule.back}"/>
+        <input class="bg-sky-500 p-1 m-1 rounded shadow disabled:opacity-75"
+               hx-post="/rule" th:hx-push-url="@{/}" hx-target="body" hx-select="#content"
+               type="submit" th:value="#{rule.save}"/>
     </div>
 </form>
 
