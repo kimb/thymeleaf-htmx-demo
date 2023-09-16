@@ -48,4 +48,12 @@ public class RuleController {
         ruleRepository.save(rule);
         return list(model);
     }
+
+    @GetMapping("/new")
+    public String newRule(final Model model) {
+        Rule rule = new Rule();
+        rule.priority = ruleRepository.getMaxPriority() + 1;
+        model.addAttribute("rule", rule);
+        return "rule";
+    }
 }
