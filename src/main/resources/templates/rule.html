@@ -1,11 +1,14 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml1-strict-thymeleaf-4" xmlns:th="http://www.thymeleaf.org" lang="en"
-      th:replace="~{ main :: main(~{::title},~{::form}) }">
+      th:replace="~{ baseTemplate :: main(~{::title}, ~{::body}) }">
+<head>
+    <title>Rules</title>
+</head>
 
-<title>Rules</title>
+<body th:fragment="body">
+<form id="content" th:object="${rule}">
+    <h1>Edit rule</h1>
 
-<body>
-<form>
     <input class="block float-right bg-sky-500 p-1 rounded shadow disabled:opacity-75"
            type="submit" hx-post="/priority" hx-target="#rules"
            hx-on::after-request="makeSortable(htmx.find('#rules'))"
@@ -22,18 +25,5 @@
     </div>
 </form>
 
-<script type="javascript">
-    function makeSortable(content) {
-        var sortables = content.querySelectorAll(".sortable");
-        for (var i = 0; i < sortables.length; i++) {
-          var sortable = sortables[i];
-          sort = new Sortable(sortable, {
-              animation: 150,
-              ghostClass: 'blue-background-class'
-          });
-        }
-    };
-    htmx.onLoad(makeSortable);
-</script>
 </body>
 </html>
