@@ -22,7 +22,6 @@
         <span class="htmx-indicator">Updating...</span>
         <input class="bg-black-200 p-1 m-1 rounded shadow disabled:opacity-75"
                hx-get="/" hx-push-url="true" hx-target="body"
-               hx-on::after-request="makeSortable(htmx.find('#rules'))"
                type="submit" th:value="#{rule.back}"/>
         <input class="bg-sky-500 p-1 m-1 rounded shadow disabled:opacity-75"
                hx-post="/rule" th:hx-push-url="@{/}" hx-target="body" hx-select="#content"

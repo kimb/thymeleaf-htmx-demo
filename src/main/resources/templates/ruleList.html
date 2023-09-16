@@ -9,7 +9,6 @@
     <h1>Edit rules</h1>
     <input class="block float-right bg-sky-500 p-1 m-1 rounded shadow disabled:opacity-75"
            type="submit" hx-post="/priority" hx-target="#rules"
-           hx-on::after-request="makeSortable(htmx.find('#rules'))"
            th:value="#{rules.save}"/>
     <span class="htmx-indicator">Updating...</span>
     <div id="rules" class="sortable clear-right" th:fragment="rules">
@@ -21,6 +20,7 @@
                    th:hx-get="@{'/rule/'+${rule.id}}" hx-push-url="true" hx-target="body" hx-select="#content"
                    type="submit" value="..."/>
         </div>
+        <script>makeSortable(htmx.find('#rules'));</script>
     </div>
 </form>
 </body>
